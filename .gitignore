@@ -1,0 +1,5 @@
+*.o
+*.gba
+*.elf
+*.log
+submission.tar.gz
