@@ -24,8 +24,10 @@ all: CFLAGS += $(CRELEASE) -I../shared
 all: LDFLAGS += $(LDRELEASE)
 all: $(PROGNAME).gba
 	@echo "[FINISH] Created $(PROGNAME).gba"
+	@rm -f Tic-Tac-Pong.tar.gz
+	@tar czvf Tic-Tac-Pong.tar.gz README.md $(PROGNAME).gba
 
-include /opt/cs2110-tools/GBAVariables.mak
+include lib/GBAVariables.mak
 
 LDFLAGS += --specs=nosys.specs
 
@@ -53,11 +55,6 @@ med: $(PROGNAME).gba
 	@mkdir -p ~/.mednafen/
 	@cp mednafen-09x.cfg ~/.mednafen/
 	@mednafen $(MEDOPT) $(PROGNAME).gba >emulator.log 2>&1
-
-.PHONY: submit
-submit: clean
-	@rm -f submission.tar.gz
-	@tar czvf submission.tar.gz *
 
 .PHONY: clean
 clean:
