@@ -45,6 +45,15 @@
 #define SSQR_DUTY1_2 (2<<6)
 #define SSQR_DUTY3_4 (3<<6)
 
+#define SFREQ_RESET 0x8000
+
+typedef enum
+{
+    NOTE_C=0, NOTE_CIS, NOTE_D,   NOTE_DIS,
+    NOTE_E,   NOTE_F,   NOTE_FIS, NOTE_G,
+    NOTE_GIS, NOTE_A,   NOTE_BES, NOTE_B
+} eSndNoteId;
+
 
 void enableSound(void);
 
