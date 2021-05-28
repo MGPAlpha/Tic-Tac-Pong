@@ -34,6 +34,11 @@ LDFLAGS += --specs=nosys.specs
 # Adjust default compiler warnings and errors
 CFLAGS += -Wstrict-prototypes -Wold-style-definition
 
+GCC_IS_VER_7 := $(shell expr `echo $(GCC_VERSION) | cut -f1 -d.` \>= 7)
+ifeq ($(GCC_IS_VER_7), 1)
+CFLAGS += -Wno-error=implicit-fallthrough --warn-no-implicit-fallthrough
+endif
+
 debug: CFLAGS += $(CDEBUG) -I../shared
 debug: LDFLAGS += $(LDDEBUG)
 debug: $(PROGNAME).gba
@@ -52,8 +57,6 @@ med: LDFLAGS += $(LDRELEASE)
 med: $(PROGNAME).gba
 	@echo "[EXECUTE] Running emulator Mednafen"
 	@echo "          Please see emulator.log if this fails"
-	@mkdir -p ~/.mednafen/
-	@cp mednafen-09x.cfg ~/.mednafen/
 	@mednafen $(MEDOPT) $(PROGNAME).gba >emulator.log 2>&1
 
 .PHONY: clean

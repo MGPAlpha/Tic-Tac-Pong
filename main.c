@@ -36,7 +36,6 @@ int main(void) {
 
     // Manipulate the state machine below as needed //
     // NOTE: Call waitForVBlank() before you draw
-#pragma GCC diagnostic ignored "-Wimplicit-fallthrough"
     switch (state) {
       case ENTER_START:
         waitForVBlank();
