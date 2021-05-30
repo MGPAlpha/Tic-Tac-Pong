@@ -5,6 +5,8 @@
 #ifndef TIC_TAC_PONG_SOUND_H
 #define TIC_TAC_PONG_SOUND_H
 
+#include <stddef.h>
+
 //Sound DMG Control
 #define REG_SNDDMGCNT (*(volatile unsigned short *) 0x4000080)
 
@@ -47,14 +49,32 @@
 
 #define SFREQ_RESET 0x8000
 
-typedef enum
-{
-    NOTE_C=0, NOTE_CIS, NOTE_D,   NOTE_DIS,
-    NOTE_E,   NOTE_F,   NOTE_FIS, NOTE_G,
-    NOTE_GIS, NOTE_A,   NOTE_BES, NOTE_B
-} eSndNoteId;
+#define NOTE_C 8013
+#define NOTE_CIS 7566
+#define NOTE_D 7144
+#define NOTE_DIS 6742
+#define NOTE_E 6362
+#define NOTE_F 6005
+#define NOTE_FIS 5666
+#define NOTE_G 5346
+#define NOTE_GIS 5048
+#define NOTE_A 4766
+#define NOTE_BES 4499
+#define NOTE_B 4246
+
+#define SND_RATE(note, oct) ( 2048-((note)>>(4+(oct))) )
+
+typedef struct {
+    const unsigned short *notes, *times;
+    const size_t size;
+} sound_effect;
+
 
 
 void enableSound(void);
+
+void soundUpdate(void);
+
+void playSoundEffect(const sound_effect *effect);
 
 #endif //TIC_TAC_PONG_SOUND_H

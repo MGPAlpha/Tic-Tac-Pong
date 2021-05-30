@@ -85,6 +85,7 @@ int main(void) {
     }
 
     previousButtons = currentButtons; // Store the current state of the buttons
+    soundUpdate();
   }
 
   UNUSED(previousButtons); // You can remove this once previousButtons is used

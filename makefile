@@ -12,7 +12,7 @@ PROGNAME = Tic-Tac-Pong
 # that will be compiled into your program. For example
 # if you have main.c and myLib.c then in the following
 # line you would put main.o and myLib.o
-OFILES = gba.o sound.o font.o main.o game.o ai.o images/splash.o images/battery.o images/x.o images/o.o images/winscreen.o images/losescreen.o
+OFILES = gba.o sound.o sfx.o font.o main.o game.o ai.o images/splash.o images/battery.o images/x.o images/o.o images/winscreen.o images/losescreen.o
 
 ################################################################################
 # These are various settings used to make the GBA toolchain work

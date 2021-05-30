@@ -3,14 +3,23 @@
 //
 
 #include "sound.h"
+#include "gba.h"
 
-const unsigned short __snd_rates[12] = {
-    8013, 7566, 7144, 6742, // C , C#, D , D#
-    6362, 6005, 5666, 5346, // E , F , F#, G
-    5048, 4766, 4499, 4246  // G#, A , A#, B
-};
+static const sound_effect *currSound;
+static unsigned short noteIndex;
+static unsigned short currNoteElapsed;
 
-#define SND_RATE(note, oct) ( 2048-(__snd_rates[note]>>(4+(oct))) )
+
+static void startNote(unsigned short index) {
+  REG_SND1CNT = SSQR_ENV_BUILD(15, 0, 0) | SSQR_DUTY1_2;
+  REG_SND1FREQ = SFREQ_RESET | currSound->notes[index];
+  currNoteElapsed = 0;
+}
+
+static void stopNote(void) {
+  REG_SND1CNT = SSQR_ENV_BUILD(0, 0, 0) | SSQR_DUTY1_2;
+  REG_SND1FREQ = 0;
+}
 
 void enableSound(void) {
     //turn on sound
@@ -25,6 +34,23 @@ void enableSound(void) {
     REG_SND1SWEEP = SSW_OFF;
 
     REG_SND1CNT = SSQR_ENV_BUILD(15, 0, 0) | SSQR_DUTY1_2;
+}
 
-    REG_SND1FREQ = SFREQ_RESET | SND_RATE(NOTE_C, 0);
+void soundUpdate(void) {
+  if (currSound && ++currNoteElapsed >= currSound->times[noteIndex]) {
+    if (noteIndex >= currSound->size - 1) {
+      stopNote();
+      currSound = NULL;
+      noteIndex = 0;
+    } else {
+      noteIndex++;
+      startNote(noteIndex);
+    }
+  }
+}
+
+void playSoundEffect(const sound_effect *effect) {
+    currSound = effect;
+    noteIndex = 0;
+    startNote(0);
 }

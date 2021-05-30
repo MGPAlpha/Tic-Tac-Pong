@@ -6,6 +6,8 @@
 #include "gba.h"
 #include "main.h"
 #include "ai.h"
+#include "sound.h"
+#include "sfx.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -52,10 +54,12 @@ void gameUpdate(int currentButtons, int previousButtons) {
     if (KEY_JUST_PRESSED(BUTTON_A, currentButtons, previousButtons) && player.energy >= MAX_ENERGY) {
       player.energy = 0;
       player.charged = 1;
+      playSoundEffect(&chargePaddle);
     }
     if (com.energy >= MAX_ENERGY) {
       com.energy = 0;
       com.charged = 1;
+      playSoundEffect(&chargePaddle);
     }
     int controlDir = (KEY_DOWN(BUTTON_UP, currentButtons) ? -1 : 0) + (KEY_DOWN(BUTTON_DOWN, currentButtons) ? 1 : 0);
     controlPaddle(&playerPaddle, controlDir);
@@ -235,9 +239,11 @@ void updatePong(void) {
     if (player.charged && !pongCharge) {
       player.charged = 0;
       pongCharge = &player;
-    }
-    if (pongCharge) {
+      playSoundEffect(&chargePong);
+    } else if (pongCharge) {
       pongCharge = &player;
+    } else {
+      playSoundEffect(&hit);
     }
   }
 
@@ -252,9 +258,11 @@ void updatePong(void) {
     if (com.charged && !pongCharge) {
       com.charged = 0;
       pongCharge = &com;
-    }
-    if (pongCharge) {
+      playSoundEffect(&chargePong);
+    } else if (pongCharge) {
       pongCharge = &com;
+    } else {
+      playSoundEffect(&hit);
     }
   }
 
