@@ -240,8 +240,9 @@ void updatePong(void) {
       player.charged = 0;
       pongCharge = &player;
       playSoundEffect(&chargePong);
-    } else if (pongCharge) {
+    } else if (pongCharge == &com) {
       pongCharge = &player;
+      playSoundEffect(&chargeSwitch);
     } else {
       playSoundEffect(&hit);
     }
@@ -259,8 +260,9 @@ void updatePong(void) {
       com.charged = 0;
       pongCharge = &com;
       playSoundEffect(&chargePong);
-    } else if (pongCharge) {
+    } else if (pongCharge == &player) {
       pongCharge = &com;
+      playSoundEffect(&chargeSwitch);
     } else {
       playSoundEffect(&hit);
     }
@@ -281,6 +283,7 @@ void updatePong(void) {
     if (pongCharge == &player) pongCharge = NULL;
     player.energy -= MISS_ENERGY_LOSS;
     if (player.energy < 0) player.energy = 0;
+    playSoundEffect(&wall);
   }
   if (pong.transform.col > TO_PHYS_COORD(WIDTH) - pong.transform.width && pong.velocity.x > 0) {
     pong.velocity.x *= -1;
@@ -289,6 +292,7 @@ void updatePong(void) {
     if (pongCharge == &com) pongCharge = NULL;
     com.energy -= MISS_ENERGY_LOSS;
     if (com.energy < 0) com.energy = 0;
+    playSoundEffect(&wall);
   }
 
   if (pongCharge) {
@@ -296,6 +300,7 @@ void updatePong(void) {
       for (int j = 0; j < 3; j++) {
         if (!symbols[i][j] && rectCollide(pong.transform, symbolColliders[i][j])) {
           symbols[i][j] = pongCharge;
+          playSoundEffect(&mark);
         }
       }
     }

@@ -9,5 +9,8 @@
 extern const sound_effect hit;
 extern const sound_effect chargePaddle;
 extern const sound_effect chargePong;
+extern const sound_effect chargeSwitch;
+extern const sound_effect wall;
+extern const sound_effect mark;
 
 #endif //TIC_TAC_PONG_SFX_H
