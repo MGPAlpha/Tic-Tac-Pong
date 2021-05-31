@@ -82,9 +82,9 @@ void gameUpdate(int currentButtons, int previousButtons) {
       winner = (playerTotal > comTotal) ? &player : &com;
       wonByScore = 1;
     }
-
     if (winner) {
       setWinningSymbols();
+      playSoundEffect(winner == &player ? &win : &lose);
     }
     gameWinner = winner;
   } else {
@@ -280,19 +280,27 @@ void updatePong(void) {
     pong.velocity.x *= -1;
     pong.velocity.y /= 2;
     pong.transform.col = 0;
-    if (pongCharge == &player) pongCharge = NULL;
+    if (pongCharge == &player) {
+      pongCharge = NULL;
+      playSoundEffect(&discharge);
+    } else {
+      playSoundEffect(&wall);
+    }
     player.energy -= MISS_ENERGY_LOSS;
     if (player.energy < 0) player.energy = 0;
-    playSoundEffect(&wall);
   }
   if (pong.transform.col > TO_PHYS_COORD(WIDTH) - pong.transform.width && pong.velocity.x > 0) {
     pong.velocity.x *= -1;
     pong.velocity.y /= 2;
     pong.transform.col = TO_PHYS_COORD(WIDTH) - pong.transform.width;
-    if (pongCharge == &com) pongCharge = NULL;
+    if (pongCharge == &com) {
+      pongCharge = NULL;
+      playSoundEffect(&discharge);
+    } else {
+      playSoundEffect(&wall);
+    }
     com.energy -= MISS_ENERGY_LOSS;
     if (com.energy < 0) com.energy = 0;
-    playSoundEffect(&wall);
   }
 
   if (pongCharge) {
@@ -343,15 +351,15 @@ void resetSymbols(void) {
 
   // For testing win states
 
-//  symbols[0][0] = NULL;
-//  symbols[0][1] = NULL;
-//  symbols[0][2] = &player;
+  symbols[0][0] = &com;
+  symbols[0][1] = &com;
+  symbols[0][2] = &com;
 //  symbols[1][0] = &player;
 //  symbols[1][1] = &player;
 //  symbols[1][2] = NULL;
-//  symbols[2][0] = &player;
-//  symbols[2][1] = &player;
-//  symbols[2][2] = NULL;
+  symbols[2][0] = &com;
+  symbols[2][1] = &com;
+  symbols[2][2] = &com;
 }
 
 struct player *checkSameSymbol(struct player *symbol1, struct player *symbol2, struct player *symbol3) {
