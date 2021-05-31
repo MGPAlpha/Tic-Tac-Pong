@@ -41,7 +41,7 @@ void gameInit(void) {
   resetPlayer(&player, CYAN, x);
   resetPlayer(&com, MAGENTA, o);
   resetSymbols();
-  resetAI();
+  resetAI(difficultyOptions + 3);
   gameWinner = NULL;
   wonByScore = 0;
   gameEndFrameCount = 0;

@@ -12,7 +12,14 @@
 #define AI_TARGET_MARGIN 4
 #define AI_ENTROPY_FRAMES 5
 
-void resetAI(void);
+typedef struct {
+  char name[10];
+  short reaction, error, targetMargin;
+} difficulty;
+
+extern difficulty difficultyOptions[4];
+
+void resetAI(difficulty *diff);
 int controlAI(struct body paddle, struct body pong, int pongCharged);
 void findTarget(struct body paddle, struct body pong, int pongCharged);
 
