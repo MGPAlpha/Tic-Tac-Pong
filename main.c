@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include "gba.h"
+#include "sound.h"
 
 #include "game.h"
 
@@ -21,6 +22,8 @@ enum gba_state state;
 int main(void) {
   // Manipulate REG_DISPCNT here to set Mode 3. //
   REG_DISPCNT = MODE3 | BG2_ENABLE;
+
+  enableSound();
 
   // Save current and previous state of button input.
   u32 previousButtons = BUTTONS;
@@ -82,6 +85,7 @@ int main(void) {
     }
 
     previousButtons = currentButtons; // Store the current state of the buttons
+    soundUpdate();
   }
 
   UNUSED(previousButtons); // You can remove this once previousButtons is used
