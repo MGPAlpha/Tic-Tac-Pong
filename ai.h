@@ -10,7 +10,9 @@
 #define AI_REACTION 30
 #define AI_ERROR 10
 #define AI_TARGET_MARGIN 4
+#define AI_ENTROPY_FRAMES 5
 
+void resetAI(void);
 int controlAI(struct body paddle, struct body pong, int pongCharged);
 void findTarget(struct body paddle, struct body pong, int pongCharged);
 

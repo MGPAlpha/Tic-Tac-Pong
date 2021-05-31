@@ -7,9 +7,14 @@
 #include "gba.h"
 #include <stdlib.h>
 
-int targetFound = 0;
-int reactionAccumulated = 0;
-int target = 0;
+static int targetFound = 0;
+static int reactionAccumulated = 0;
+static int target = 0;
+static int entropicStartTime = 0;
+
+void resetAI(void) {
+  entropicStartTime = 0;
+}
 
 int controlAI(struct body paddle, struct body pong, int pongCharged) {
 //  int rowDiff = paddle.transform.row + paddle.transform.height / 2 - (pong.transform.row + pong.transform.height / 2);
@@ -29,6 +34,11 @@ int controlAI(struct body paddle, struct body pong, int pongCharged) {
       findTarget(paddle, pong, pongCharged);
       targetFound = 1;
     }
+  }
+
+  if (entropicStartTime < AI_ENTROPY_FRAMES) {
+    entropicStartTime++;
+    return 1;
   }
 
   if (targetFound) {
