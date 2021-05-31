@@ -351,15 +351,15 @@ void resetSymbols(void) {
 
   // For testing win states
 
-  symbols[0][0] = &com;
-  symbols[0][1] = &com;
-  symbols[0][2] = &com;
+//  symbols[0][0] = &com;
+//  symbols[0][1] = &com;
+//  symbols[0][2] = &com;
 //  symbols[1][0] = &player;
 //  symbols[1][1] = &player;
 //  symbols[1][2] = NULL;
-  symbols[2][0] = &com;
-  symbols[2][1] = &com;
-  symbols[2][2] = &com;
+//  symbols[2][0] = &com;
+//  symbols[2][1] = &com;
+//  symbols[2][2] = &com;
 }
 
 struct player *checkSameSymbol(struct player *symbol1, struct player *symbol2, struct player *symbol3) {
