@@ -32,7 +32,7 @@
 #define TO_PHYS_COORD(coord) ((coord) << PHYSICS_SCALE)
 #define TO_SCREEN_COORD(coord) ((coord) >> PHYSICS_SCALE)
 
-#define PADDLE_ACCEL 10
+#define PADDLE_ACCEL 30
 #define PADDLE_DRAG 20
 
 #define PADDLE_BASE_SPIN (PONG_VEL_INIT / 3)

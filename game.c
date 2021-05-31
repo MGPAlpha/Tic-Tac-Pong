@@ -173,9 +173,10 @@ void controlPaddle(struct body *paddle, int dir) {
   if (dir != 0) {
     dir = dir/abs(dir);
     paddle->velocity.y += PADDLE_ACCEL * dir;
-  } else if (abs(paddle->velocity.y) <= PADDLE_DRAG) {
+  }
+  if (abs(paddle->velocity.y) <= PADDLE_DRAG) {
     paddle->velocity.y = 0;
-  } else if (paddle->velocity.y) {
+  } else {
     paddle->velocity.y += (paddle->velocity.y > 0 ? -1 : 1) * PADDLE_DRAG;
   }
 
