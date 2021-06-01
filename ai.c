@@ -7,7 +7,8 @@
 #include "gba.h"
 #include <stdlib.h>
 
-difficulty difficultyOptions[4] = {
+difficulty difficultyOptions[5] = {
+        {"Trivial", 0, 100, 5},
         {"Easy", 30, 15, 5},
         {"Normal", 30, 10, 4},
         {"Hard", 20, 8, 3},

@@ -13,11 +13,11 @@
 #define AI_ENTROPY_FRAMES 5
 
 typedef struct {
-  char name[10];
-  short reaction, error, targetMargin;
+  const char name[10];
+  const short reaction, error, targetMargin;
 } difficulty;
 
-extern difficulty difficultyOptions[4];
+extern difficulty difficultyOptions[5];
 
 void resetAI(difficulty *diff);
 int controlAI(struct body paddle, struct body pong, int pongCharged);

@@ -2,9 +2,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "gba.h"
 #include "sound.h"
+#include "ai.h"
 
 #include "game.h"
 
@@ -15,9 +17,26 @@
 #include "images/winscreen.h"
 #include "images/losescreen.h"
 
+#define DIFF_CHOICE_PADDING 3
+#define DIFF_CHOICE_HEIGHT (8 + 2 * (DIFF_CHOICE_PADDING))
+#define DIFF_CHOICE_OFFSET 40
+
 // Add any additional states you need for your app. You are not requried to use
 // these specific provided states.
 enum gba_state state;
+
+static short diffChoiceIndex = 0;
+
+static int modulo(int x,int N){
+  return (x % N + N) %N;
+}
+
+static void drawDiffLevel(size_t index, unsigned short fgColor, unsigned short bgColor) {
+  int rectWidth = 6 * strlen(difficultyOptions[index].name) + 2 * DIFF_CHOICE_PADDING;
+  drawRectDMA(DIFF_CHOICE_HEIGHT * index + DIFF_CHOICE_OFFSET, (WIDTH - rectWidth) / 2, rectWidth
+              , DIFF_CHOICE_HEIGHT, bgColor);
+  drawCenteredString(DIFF_CHOICE_HEIGHT * index + DIFF_CHOICE_OFFSET, 0, WIDTH, DIFF_CHOICE_HEIGHT, (char *) difficultyOptions[index].name, fgColor);
+}
 
 int main(void) {
   // Manipulate REG_DISPCNT here to set Mode 3. //
@@ -46,12 +65,38 @@ int main(void) {
         state = START;
       case START:
         if (KEY_JUST_PRESSED(BUTTON_START, currentButtons, previousButtons)) {
-          state = ENTER_PLAY;
+          state = ENTER_DIFFICULTY;
         }
         waitForVBlank();
         break;
+      case ENTER_DIFFICULTY:
+        waitForVBlank();
+        fillScreenDMA(BLACK);
+        waitForVBlank();
+        for (size_t i = 0; i < sizeof(difficultyOptions) / sizeof(difficulty); i++) {
+          drawDiffLevel(i, WHITE, BLACK);
+        }
+        state = DIFFICULTY;
+      case DIFFICULTY:
+        {
+          short oldDiffChoiceIndex = diffChoiceIndex;
+          if (KEY_JUST_PRESSED(BUTTON_UP, currentButtons, previousButtons)) {
+            diffChoiceIndex = modulo(diffChoiceIndex - 1,sizeof difficultyOptions / sizeof(difficulty));
+          }
+          if (KEY_JUST_PRESSED(BUTTON_DOWN, currentButtons, previousButtons)) {
+            diffChoiceIndex = modulo(diffChoiceIndex + 1,sizeof difficultyOptions / sizeof(difficulty));
+          }
+          if (KEY_JUST_PRESSED(BUTTON_START, currentButtons, previousButtons)) {
+            state = ENTER_PLAY;
+          }
+          UNUSED(oldDiffChoiceIndex);
+          waitForVBlank();
+          drawDiffLevel(oldDiffChoiceIndex, WHITE, BLACK);
+          drawDiffLevel(diffChoiceIndex, BLACK, diffChoiceIndex == 4 ? RED : WHITE);
+        }
+        break;
       case ENTER_PLAY:
-        gameInit();
+        gameInit(diffChoiceIndex);
         state = PLAY;
       case PLAY:
         gameUpdate(currentButtons, previousButtons);

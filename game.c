@@ -34,14 +34,14 @@ int wonByScore = 0;
 
 int gameEndFrameCount = 0;
 
-void gameInit(void) {
+void gameInit(int diffIndex) {
   resetPaddle(&playerPaddle, LEFT_PADDLE_COL);
   resetPaddle(&comPaddle, RIGHT_PADDLE_COL);
   resetPong(1);
   resetPlayer(&player, CYAN, x);
   resetPlayer(&com, MAGENTA, o);
   resetSymbols();
-  resetAI(difficultyOptions + 3);
+  resetAI(difficultyOptions + diffIndex);
   gameWinner = NULL;
   wonByScore = 0;
   gameEndFrameCount = 0;
