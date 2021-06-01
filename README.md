@@ -37,6 +37,8 @@ If either player manages to get three of their marks in a row on the board, they
 
 For information on the game's development environment, see the accompanying file [dev-readme.md](dev-readme.md)
 
+Recommended configuration for the Mednafen emulator is included in [Tic-Tac-Pong.gba.cfg](Tic-Tac-Pong.gba.cfg)
+
 ###### Contact the developer
 > Mitchell Philipp (he/they): [mgpalpha1@gmail.com](mailto:mgpalpha1@gmail.com)
 >

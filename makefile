@@ -25,7 +25,7 @@ all: LDFLAGS += $(LDRELEASE)
 all: $(PROGNAME).gba
 	@echo "[FINISH] Created $(PROGNAME).gba"
 	@rm -f Tic-Tac-Pong.tar.gz
-	@tar czvf Tic-Tac-Pong.tar.gz README.md $(PROGNAME).gba
+	@tar czvf Tic-Tac-Pong.tar.gz README.md dev-readme.md Tic-Tac-Pong.gba.cfg $(PROGNAME).gba
 
 include lib/GBAVariables.mak
 
