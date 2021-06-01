@@ -57,7 +57,7 @@ void gameUpdate(int currentButtons, int previousButtons) {
       player.charged = 1;
       playSoundEffect(&chargePaddle);
     }
-    if (com.energy >= MAX_ENERGY) {
+    if (com.energy >= MAX_ENERGY && !pongCharge && pong.velocity.x > 0 && pong.transform.col > TO_PHYS_COORD(WIDTH / 2)) {
       com.energy = 0;
       com.charged = 1;
       playSoundEffect(&chargePaddle);
