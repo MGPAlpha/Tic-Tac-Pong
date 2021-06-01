@@ -35,5 +35,9 @@ If either player manages to get three of their marks in a row on the board, they
 | Hard       | Above average difficulty. Provides a little extra challenge, with a more skilled AI.              |
 | Expert     | Near perfect AI. It will rarely miss.                                                             |
 
+For information on the game's development environment, see the accompanying file [dev-readme.md](dev-readme.md)
+
 ###### Contact the developer
-> Mitchell Philipp (he/they): mgpalpha1@gmail.com
+> Mitchell Philipp (he/they): [mgpalpha1@gmail.com](mailto:mgpalpha1@gmail.com)
+>
+> Github: [MGPAlpha](https://github.com/MGPAlpha)
