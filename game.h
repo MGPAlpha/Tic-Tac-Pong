@@ -79,7 +79,7 @@ struct player {
     const unsigned short *symbol;
 };
 
-void gameInit(void);
+void gameInit(int diffIndex);
 void gameUpdate(int currentButtons, int previousButtons);
 void drawBoard(void);
 void drawBorders(void);

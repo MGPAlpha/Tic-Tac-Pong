@@ -27,6 +27,8 @@
 extern enum gba_state {
     ENTER_START,
     START,
+    ENTER_DIFFICULTY,
+    DIFFICULTY,
     ENTER_PLAY,
     PLAY,
     ENTER_WIN,

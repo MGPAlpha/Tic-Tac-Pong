@@ -34,14 +34,14 @@ int wonByScore = 0;
 
 int gameEndFrameCount = 0;
 
-void gameInit(void) {
+void gameInit(int diffIndex) {
   resetPaddle(&playerPaddle, LEFT_PADDLE_COL);
   resetPaddle(&comPaddle, RIGHT_PADDLE_COL);
   resetPong(1);
   resetPlayer(&player, CYAN, x);
   resetPlayer(&com, MAGENTA, o);
   resetSymbols();
-  resetAI();
+  resetAI(difficultyOptions + diffIndex);
   gameWinner = NULL;
   wonByScore = 0;
   gameEndFrameCount = 0;
@@ -57,7 +57,7 @@ void gameUpdate(int currentButtons, int previousButtons) {
       player.charged = 1;
       playSoundEffect(&chargePaddle);
     }
-    if (com.energy >= MAX_ENERGY) {
+    if (com.energy >= MAX_ENERGY && !pongCharge && pong.velocity.x > 0 && pong.transform.col > TO_PHYS_COORD(WIDTH / 2)) {
       com.energy = 0;
       com.charged = 1;
       playSoundEffect(&chargePaddle);

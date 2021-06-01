@@ -7,13 +7,23 @@
 #include "gba.h"
 #include <stdlib.h>
 
+difficulty difficultyOptions[5] = {
+        {"Trivial", 0, 100, 5},
+        {"Easy", 30, 15, 5},
+        {"Normal", 30, 10, 4},
+        {"Hard", 20, 8, 3},
+        {"Expert", 0, 0, 1}
+};
+
 static int targetFound = 0;
 static int reactionAccumulated = 0;
 static int target = 0;
 static int entropicStartTime = 0;
+static difficulty *currDifficulty;
 
-void resetAI(void) {
+void resetAI(difficulty *diff) {
   entropicStartTime = 0;
+  currDifficulty = diff;
 }
 
 int controlAI(struct body paddle, struct body pong, int pongCharged) {
@@ -30,7 +40,7 @@ int controlAI(struct body paddle, struct body pong, int pongCharged) {
 
   if (!targetFound) {
     reactionAccumulated++;
-    if (reactionAccumulated >= AI_REACTION) {
+    if (reactionAccumulated >= currDifficulty->reaction) {
       findTarget(paddle, pong, pongCharged);
       targetFound = 1;
     }
@@ -43,7 +53,7 @@ int controlAI(struct body paddle, struct body pong, int pongCharged) {
 
   if (targetFound) {
     int rowDiff = paddle.transform.row + paddle.transform.height / 2 - target;
-    if (abs(rowDiff) < TO_PHYS_COORD(AI_TARGET_MARGIN)) return 0;
+    if (abs(rowDiff) < TO_PHYS_COORD(currDifficulty->targetMargin)) return 0;
     else if (rowDiff > 0) {
       return -1;
     }
@@ -66,6 +76,6 @@ void findTarget(struct body paddle, struct body pong, int pongCharged) {
       targetRow = 2 * maxRow - targetRow;
     }
   }
-  targetRow += randint(-TO_PHYS_COORD(AI_ERROR), TO_PHYS_COORD(AI_ERROR));
+  targetRow += randint(-TO_PHYS_COORD(currDifficulty->error), TO_PHYS_COORD(currDifficulty->error));
   target = targetRow;
 }
