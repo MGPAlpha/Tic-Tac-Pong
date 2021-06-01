@@ -16,6 +16,7 @@
 #include "images/splash.h"
 #include "images/winscreen.h"
 #include "images/losescreen.h"
+#include "images/diffscreen.h"
 
 #define DIFF_CHOICE_PADDING 3
 #define DIFF_CHOICE_HEIGHT (8 + 2 * (DIFF_CHOICE_PADDING))
@@ -71,7 +72,7 @@ int main(void) {
         break;
       case ENTER_DIFFICULTY:
         waitForVBlank();
-        fillScreenDMA(BLACK);
+        drawFullScreenImageDMA(diffscreen);
         waitForVBlank();
         for (size_t i = 0; i < sizeof(difficultyOptions) / sizeof(difficulty); i++) {
           drawDiffLevel(i, WHITE, BLACK);
