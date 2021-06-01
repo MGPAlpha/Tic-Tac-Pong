@@ -3,21 +3,17 @@
 
 Tic-Tac-Pong is a Player vs. Computer game for the GameBoy Advance. It combines the classic video game Pong with the pen-and-paper game Tic-Tac-Toe.
 
-## The Rules
-* Each player (the user and the computer AI) controls a paddle on either side of the screen.
-* At the center of the screen is a tic-tac-toe board.
-* A small ball, called a pong, moves around the screen and bounces off of the edges and the paddles.
-* The players can move their paddles up and down in order to hit the pong and bounce it back toward the other player.
-* Each player accumulates energy when they hit the pong with their paddle. Each player's accumulated energy is represented by a small battery icon on their side of the screen.
-* Each player can accumulate a maximum of 12 energy.
-* When a player hits the pong, they gain 2 energy. They also gain a bonus of 1 energy if the pong is moving particularly fast when they hit it.
-* When a player fails to hit the pong with their paddle and it hits the wall behind them, they lose 1 energy.
-* When a player accumulates the maximum 12 energy, their battery will flash cyan. When the battery flashes, the player can expend all the energy to charge their paddle, causing it to blink.
-* When the pong is hit by a charged paddle, it becomes charged with the color of the player that hit it.
-* When the pong becomes charged, open spots on the tic-tac-toe will begin to flash.
-* When a charged pong passes through an open spot on the board, it will mark that spot with an X or O for the player that charged it.
-* If a player hits a charged pong with their paddle, its charge switches to them, so that it can now score for that player on the board.
-* The pong loses its charge if both players consecutively fail to hit it.
+**Objective:** Place 3 cyan X's in a row on the Tic-Tac-Toe board before the AI get 3 magenta O's in a row. 
+
+## How to Play
+* The player and the AI use their paddles to hit the pong back and forth.
+* Each you hit the pong with your paddle, it adds energy to your battery battery.
+* If you miss the pong and it hits the wall, your battery will lose a little power.
+* When your battery is full, you can press `A` to charge your paddle.
+* When you hit the pong with a charged paddle, the pong will speed up and become charged.
+* When the charged pong passes thru a spot on the Tic-Tac-Toe board, it will place a mark there for the last player to hit it.
+* If the charged pong hits a wall twice in a row, it loses its charge and slows back down.
+* Get three of your marks in a row to win!
 
 ## Winning the Game
 If either player manages to get three of their marks in a row on the board, they win immediately. If all the spaces on the board are captured, and neither player has three marks in a row, the player with the most marks on the board wins. Each player's total is displayed in the lower corner of the screen.
@@ -29,6 +25,15 @@ If either player manages to get three of their marks in a row on the board, they
 | `UP` and `DOWN` | Move the player's paddle up and down the screen            |
 | `A`             | Use the player's accumulated energy to charge their paddle |
 |  Hold `SELECT`  | Return to the title screen                                 |
+
+## Difficulty Options
+| Difficulty | Description |
+| ---------- | ----------- |
+| Trivial    | Not even a challenge. The AI will almost always miss the pong.                                    |
+| Easy       | An easier experience. The AI is more likely to miss the pong, and takes longer to make decisions. |
+| Normal     | A medium challenge. **Recommended for new players.**                                              |
+| Hard       | Above average difficulty. Provides a little extra challenge, with a more skilled AI.              |
+| Expert     | Near perfect AI. It will rarely miss.                                                             |
 
 ###### Contact the developer
 > Mitchell Philipp (he/they): mgpalpha1@gmail.com
