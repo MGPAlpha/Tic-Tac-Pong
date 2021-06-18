@@ -1,7 +1,7 @@
 /*
  * Exported with nin10kit v1.8
- * Invocation command was nin10kit --mode=3 --resize=240x160 splash splash.png 
- * Time-stamp: Monday 04/05/2021, 04:14:05
+ * Invocation command was nin10kit --mode=3 splash splash.png 
+ * Time-stamp: Thursday 06/17/2021, 20:16:08
  * 
  * Image Information
  * -----------------
