@@ -11,14 +11,14 @@ static unsigned short currNoteElapsed;
 
 
 static void startNote(unsigned short index) {
-  REG_SND1CNT = SSQR_ENV_BUILD(15, 0, 0) | SSQR_DUTY1_2;
+  REG_SND1CNT = SSQR_ENV_BUILD(15, 0, 7) | SSQR_DUTY1_2;
   REG_SND1FREQ = SFREQ_RESET | currSound->notes[index];
   currNoteElapsed = 0;
 }
 
 static void stopNote(void) {
-  REG_SND1CNT = SSQR_ENV_BUILD(0, 0, 0) | SSQR_DUTY1_2;
-  REG_SND1FREQ = 0;
+  REG_SND1CNT = SSQR_ENV_BUILD(0, 0, 1) | SSQR_DUTY1_2;
+  // REG_SND1FREQ = 0;
 }
 
 void enableSound(void) {
